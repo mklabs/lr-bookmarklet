@@ -1,31 +1,39 @@
-javascript:(function(){
+javascript:(function() {
 
-// avoid the bookmarklet activating more than once
-if (window.MyNamespace) {
-    return;
-}
-window.MyNamespace = { };
+  function injectScript(url, done, fn) {
+    if (injectScript.cache[url]) return;
+    injectScript.cache[url] = true;
 
-var version = 1,
-    script  = document.createElement('script');
+    var a = document.createElement('script');
+    a.src = url;
+    a.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(a);
 
-script.setAttribute('type', 'text/javascript');
-script.setAttribute('charset', 'UTF-8');
-script.setAttribute('src', 'http://example.com/script.js?r=' + Math.random());
-document.documentElement.appendChild(script);
+    fn = fn || function() {
+      var rs = a.readyState;
+      if (!rs || rs === 'loaded' || rs === 'complete') {
+          a.onload = a.onreadystatechange = null;
+          done();
+      }
+    };
 
-script.onload = script.onreadystatechange = function() {
-    var rs = script.readyState;
-    if (!rs || rs === 'loaded' || rs === 'complete') {
-        script.onload = script.onreadystatechange = null;
+    done = done || function() {};
 
-        // initialise or warn if older version
-        if (version !== window.MyNamespace.version) {
-            alert('This bookmarklet is out of date!');
-        } else {
-            window.MyNamespace.init();
-        }
-    }
-};
+    a.onload = a.onreadystatechange = fn;
+  }
+
+  injectScript.cache = {};
+
+  function load(name, done) {
+    var urls = {
+      '_': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js',
+      'lr': 'http://localhost:35729/livereload.js'
+    };
+
+    var url = urls[name] || name;
+    injectScript(url, done);
+  }
+
+  load('lr');
 
 }());
