@@ -1,16 +1,59 @@
-<!--
-TODOs:
+<!doctype html>
+<!--[if lt IE 7]>  <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>     <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>     <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>LR Bookmarklet</title>
+    <meta name="viewport" content="width=device-width">
 
-- Store userconf to locaStorage / cookies
-- Prompt for livereload server hostname / port
+    <!--
+    TODOs:
 
--->
+    - Store userconf to locaStorage / cookies
+    - Prompt for livereload server hostname / port
+
+    -->
+    <style>
+
+    body {
+      padding: 80px;
+      font-family: Arial, sans-serif;
+    }
+
+    .lr-wrapper {
+      padding-top: 40px;
+    }
+
+    .lr-bookmarklet {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      color: #333;
+      text-decoration: none;
+    }
+    </style>
+
+  </head>
+  <body>
+
+    <p>
+    A little bookmarklet to load
+    <a href="https://github.com/livereload/livereload-js">livereload.js</a> script and
+    connect to a local Livereload server.
+    </p>
+
+    <p class="lr-wrapper">
+      Drag the
+      <a class="lr-bookmarklet"
+        href="javascript:(function(){var%20script=document.createElement('script');script.type='text/javascript';script.src='//localhost:3000/lr.js';document.body.appendChild(script);})()">
+        LR bookmarklet
+      </a>
+      to your bookmarks bar.
+    </p>
 
 
-<style>.lr-bookmarklet {border: 1px solid #ccc; padding 1em; display:
-inline-block; padding: 6px 12px; color: #333; text-decoration: none;
-font-family: Arial, sans-serif;}</style>
-<a class="lr-bookmarklet"
-  href="javascript:(function(){var%20script=document.createElement('script');script.type='text/javascript';script.src='//localhost:3000/lr.js';document.body.appendChild(script);})()">
-  LR bookmarklet - Click or bookmark me
-</a>
+  </body>
+</html>

@@ -1,5 +1,9 @@
 javascript:(function() {
 
+  // TODO:
+  //
+  // A way to specify options and load the livereload.js script from another
+  // host:port (instead of default localhost:35729)
   function injectScript(url, done, fn) {
     if (injectScript.cache[url]) return;
     injectScript.cache[url] = true;
